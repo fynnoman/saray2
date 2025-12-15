@@ -8,6 +8,23 @@ export default function Home() {
   const [mapsAccepted, setMapsAccepted] = useState(false);
   const [orderMenuOpen, setOrderMenuOpen] = useState(false);
 
+  // Close dropdown when clicking outside
+  React.useEffect(() => {
+    const handleClickOutside = () => {
+      if (orderMenuOpen) {
+        setOrderMenuOpen(false);
+      }
+    };
+    
+    if (orderMenuOpen) {
+      document.addEventListener('click', handleClickOutside);
+    }
+    
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, [orderMenuOpen]);
+
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-black via-[#18181b] to-[#23272f] relative overflow-x-hidden font-sans">
       {/* DSGVO Cookie Banner */}
@@ -97,9 +114,12 @@ export default function Home() {
           </a>
 
           {/* Online Bestellen Button */}
-          <div className="mt-16 animate-fadein delay-450 relative">
+          <div className="mt-16 animate-fadein delay-450 relative z-30">
             <button 
-              onClick={() => setOrderMenuOpen(!orderMenuOpen)}
+              onClick={(e) => {
+                e.stopPropagation();
+                setOrderMenuOpen(!orderMenuOpen);
+              }}
               className="inline-flex items-center gap-3 px-10 py-5 rounded-full bg-white text-black font-bold text-xl sm:text-2xl shadow-2xl hover:scale-105 hover:shadow-3xl transition-all duration-300 group border-2 border-white/20"
             >
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-7 h-7 sm:w-8 sm:h-8 group-hover:scale-110 transition-transform">
@@ -113,7 +133,10 @@ export default function Home() {
 
             {/* Dropdown Menu */}
             {orderMenuOpen && (
-              <div className="absolute top-full mt-4 left-1/2 -translate-x-1/2 w-full max-w-md bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl border-2 border-white/20 overflow-hidden animate-fadein z-10">
+              <div 
+                onClick={(e) => e.stopPropagation()}
+                className="absolute top-full mt-4 left-1/2 -translate-x-1/2 w-full max-w-md bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl border-2 border-white/20 overflow-hidden animate-fadein z-50"
+              >
                 <div className="flex flex-col gap-2 p-4">
                   {/* Lieferando */}
                   <a

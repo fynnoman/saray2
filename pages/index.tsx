@@ -114,7 +114,7 @@ export default function Home() {
           </a>
 
           {/* Online Bestellen Button */}
-          <div className="mt-16 animate-fadein delay-450 relative z-30">
+          <div className="mt-16 animate-fadein delay-450">
             <button 
               onClick={(e) => {
                 e.stopPropagation();
@@ -131,11 +131,11 @@ export default function Home() {
               </svg>
             </button>
 
-            {/* Dropdown Menu */}
+            {/* Dropdown Menu - pushes content down */}
             {orderMenuOpen && (
               <div 
                 onClick={(e) => e.stopPropagation()}
-                className="absolute top-full mt-4 left-1/2 -translate-x-1/2 w-full max-w-md bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl border-2 border-white/20 overflow-hidden animate-fadein z-50"
+                className="mt-4 w-full max-w-md mx-auto bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl border-2 border-white/20 overflow-hidden animate-fadein"
               >
                 <div className="flex flex-col gap-2 p-4">
                   {/* Lieferando */}

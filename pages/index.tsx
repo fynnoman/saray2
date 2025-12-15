@@ -395,10 +395,12 @@ export default function Home() {
               <div className="aspect-[9/16] overflow-hidden bg-black">
                 <video 
                   className="w-full h-full object-cover"
-                  controls
+                  autoPlay
+                  loop
                   muted
                   playsInline
-                  preload="none"
+                  preload="metadata"
+                  poster="/video1-thumb.jpg"
                   disablePictureInPicture
                   controlsList="nodownload nofullscreen noremoteplayback"
                   style={{ pointerEvents: 'auto' }}
@@ -414,10 +416,12 @@ export default function Home() {
               <div className="aspect-[9/16] overflow-hidden bg-black">
                 <video 
                   className="w-full h-full object-cover"
-                  controls
+                  autoPlay
+                  loop
                   muted
                   playsInline
-                  preload="none"
+                  preload="metadata"
+                  poster="/video2-thumb.jpg"
                   disablePictureInPicture
                   controlsList="nodownload nofullscreen noremoteplayback"
                   style={{ pointerEvents: 'auto' }}
@@ -433,10 +437,12 @@ export default function Home() {
               <div className="aspect-[9/16] overflow-hidden bg-black">
                 <video 
                   className="w-full h-full object-cover"
-                  controls
+                  autoPlay
+                  loop
                   muted
                   playsInline
-                  preload="none"
+                  preload="metadata"
+                  poster="/video3-thumb.jpg"
                   disablePictureInPicture
                   controlsList="nodownload nofullscreen noremoteplayback"
                   style={{ pointerEvents: 'auto' }}
@@ -482,12 +488,12 @@ export default function Home() {
           <div className="flex justify-center items-center gap-2 mb-12">
             <div className="flex gap-1">
               {[...Array(5)].map((_, i) => (
-                <svg key={i} className="w-8 h-8 text-yellow-400 fill-current" viewBox="0 0 24 24">
+                <svg key={i} className={`w-8 h-8 ${i < 4 ? 'text-yellow-400' : 'text-gray-400'} fill-current`} viewBox="0 0 24 24">
                   <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
                 </svg>
               ))}
             </div>
-            <span className="text-2xl font-bold text-white">5.0</span>
+            <span className="text-2xl font-bold text-white">4.4</span>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

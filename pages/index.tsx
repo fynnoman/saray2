@@ -6,6 +6,7 @@ export default function Home() {
   const [flippedCards, setFlippedCards] = useState<{[key: string]: boolean}>({});
   const [cookieAccepted, setCookieAccepted] = useState(false);
   const [mapsAccepted, setMapsAccepted] = useState(false);
+  const [orderMenuOpen, setOrderMenuOpen] = useState(false);
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-black via-[#18181b] to-[#23272f] relative overflow-x-hidden font-sans">
@@ -96,16 +97,63 @@ export default function Home() {
           </a>
 
           {/* Online Bestellen Button */}
-          <div className="mt-16 animate-fadein delay-450">
-            <a 
-              href="tel:+4968317613367"
-              className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-white text-black font-bold text-lg sm:text-xl shadow-2xl hover:scale-105 hover:shadow-3xl transition-all duration-300 group border-2 border-white/20"
+          <div className="mt-16 animate-fadein delay-450 relative">
+            <button 
+              onClick={() => setOrderMenuOpen(!orderMenuOpen)}
+              className="inline-flex items-center gap-3 px-10 py-5 rounded-full bg-white text-black font-bold text-xl sm:text-2xl shadow-2xl hover:scale-105 hover:shadow-3xl transition-all duration-300 group border-2 border-white/20"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-6 h-6 sm:w-7 sm:h-7 group-hover:scale-110 transition-transform">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-7 h-7 sm:w-8 sm:h-8 group-hover:scale-110 transition-transform">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
               </svg>
               <span className="group-hover:tracking-wider transition-all">Online bestellen</span>
-            </a>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className={`w-6 h-6 transition-transform duration-300 ${orderMenuOpen ? 'rotate-180' : ''}`}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+              </svg>
+            </button>
+
+            {/* Dropdown Menu */}
+            {orderMenuOpen && (
+              <div className="absolute top-full mt-4 left-1/2 -translate-x-1/2 w-full max-w-md bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl border-2 border-white/20 overflow-hidden animate-fadein z-10">
+                <div className="flex flex-col gap-2 p-4">
+                  {/* Lieferando */}
+                  <a
+                    href="https://www.lieferando.de/speisekarte/saray-sonnenstrasse-11-66740-saarlouis"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-4 px-6 py-4 rounded-xl bg-gradient-to-r from-[#ff8000] to-[#ff6600] text-white font-bold text-lg shadow-lg hover:scale-105 hover:shadow-xl transition-all duration-300 group"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-7 h-7 group-hover:scale-110 transition-transform">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 21v-7.5a.75.75 0 01.75-.75h3a.75.75 0 01.75.75V21m-4.5 0H2.36m11.14 0H18m0 0h3.64m-1.39 0V9.349m-16.5 11.65V9.35m0 0a3.001 3.001 0 003.75-.615A2.993 2.993 0 009.75 9.75c.896 0 1.7-.393 2.25-1.016a2.993 2.993 0 002.25 1.016c.896 0 1.7-.393 2.25-1.016a3.001 3.001 0 003.75.614m-16.5 0a3.004 3.004 0 01-.621-4.72L4.318 3.44A1.5 1.5 0 015.378 3h13.243a1.5 1.5 0 011.06.44l1.19 1.189a3 3 0 01-.621 4.72m-13.5 8.65h3.75a.75.75 0 00.75-.75V13.5a.75.75 0 00-.75-.75H6.75a.75.75 0 00-.75.75v3.75c0 .415.336.75.75.75z" />
+                    </svg>
+                    <span className="group-hover:tracking-wide transition-all">Lieferando</span>
+                  </a>
+
+                  {/* Speisekarte24 */}
+                  <a
+                    href="https://www.speisekarte24.de/Heimservice_Saray_in_Saarlouis_2033/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-4 px-6 py-4 rounded-xl bg-gradient-to-r from-[#e31e24] to-[#c71f25] text-white font-bold text-lg shadow-lg hover:scale-105 hover:shadow-xl transition-all duration-300 group"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-7 h-7 group-hover:scale-110 transition-transform">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+                    </svg>
+                    <span className="group-hover:tracking-wide transition-all">Speisekarte24</span>
+                  </a>
+
+                  {/* Telefon */}
+                  <a
+                    href="tel:+4968317613367"
+                    className="flex items-center gap-4 px-6 py-4 rounded-xl bg-gradient-to-r from-[#22c55e] to-[#16a34a] text-white font-bold text-lg shadow-lg hover:scale-105 hover:shadow-xl transition-all duration-300 group"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-7 h-7 group-hover:scale-110 transition-transform">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
+                    </svg>
+                    <span className="group-hover:tracking-wide transition-all">Telefonisch bestellen</span>
+                  </a>
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Address */}
